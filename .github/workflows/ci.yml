@@ -57,8 +57,8 @@ jobs:
       - run: npm run db:migrate && npm run db:seed
       - name: Start the helper servers
         run: |
-          nohup python3 -m http.server 4001 --directory public/trails > /dev/null 2>&1 &
-          nohup node mock-api/server.mjs > mock-api.log 2>&1 &
+          nohup python3 -m http.server 4001 -d public/trails >/dev/null 2>&1 &
+          nohup node mock-api/server.mjs >mock-api.log 2>&1 &
           sleep 2
           curl --fail --silent localhost:4002/trails > /dev/null
           curl --fail --silent --head localhost:4001/alpine-lake.jpg > /dev/null
@@ -68,7 +68,9 @@ jobs:
           key: next-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
           restore-keys: next-${{ runner.os }}-
       - run: npm run build
-      - run: npx playwright test --project=chromium --project=signed-in --shard=${{ matrix.shard }}/2
+      - run: >
+          npx playwright test --project=chromium --project=signed-in
+          --shard=${{ matrix.shard }}/2
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
