@@ -7,6 +7,20 @@ const teardown = /.*\.teardown\.js/;
 // Needs the dev server, for instant()
 const devOnly = /loading\.spec\.js/;
 
+// The servers that the tests need
+const app = {
+  // In CI, the build. On a laptop, the dev server
+  command: process.env.CI ? "npm start" : "npm run dev",
+  url: "http://localhost:3000",
+  reuseExistingServer: true,
+};
+// The small WebSocket server of the chat
+const chat = {
+  command: "node realtime/chat-server.mjs",
+  port: 4003,
+  reuseExistingServer: true,
+};
+
 export default defineConfig({
   testDir: "e2e",
   // Run the tests of a file in parallel too
@@ -18,13 +32,8 @@ export default defineConfig({
   // A list in the terminal,
   // and a report to open later
   reporter: [["list"], ["html", { open: "never" }]],
-  // Start the app, if it is not running
-  webServer: {
-    // In CI, the build. On a laptop, the dev server
-    command: process.env.CI ? "npm start" : "npm run dev",
-    url: "http://localhost:3000",
-    reuseExistingServer: true,
-  },
+  // Start them, if they are not running
+  webServer: [app, chat],
   use: {
     baseURL: "http://localhost:3000",
     // Keep the trace of a test that fails

@@ -6,6 +6,7 @@ import "./globals.css";
 import { siteUrl } from "@/lib/site";
 import Analytics from "@/components/Analytics";
 import WebVitals from "@/components/WebVitals";
+import OfflineBanner from "@/components/OfflineBanner";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { FavoritesProvider } from "@/components/FavoritesProvider";
@@ -89,6 +90,7 @@ export default function RootLayout({ children }) {
         </a>
         <ToastProvider>
         <FavoritesProvider>
+          <OfflineBanner />
           <SiteHeader />
           <div id="content" tabIndex={-1} className="flex flex-1 flex-col outline-none">
             {children}

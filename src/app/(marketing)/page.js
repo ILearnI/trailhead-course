@@ -1,6 +1,7 @@
 import Counter from "@/components/Counter";
 import Greeting from "@/components/Greeting";
 import Image from "next/image";
+import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { websiteJsonLd } from "@/lib/json-ld";
 
@@ -52,6 +53,9 @@ export default function Home() {
           </p>
         </div>
         <Counter />
+        <Link href="/live" className="underline">
+          Live counters
+        </Link>
         <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
           <a
             className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"

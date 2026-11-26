@@ -26,6 +26,8 @@ const nextConfig = {
     quick: { stale: 30, revalidate: 5, expire: 60 },
   },
   experimental: {
+    // Detect the network, and retry what failed
+    useOffline: true,
     // Turn on forbidden() and unauthorized()
     authInterrupts: true,
     // Our own limit is 2 MB
