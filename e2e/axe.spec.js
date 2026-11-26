@@ -4,6 +4,7 @@ import { expect, test } from "./fixtures";
 const pages = [
   "/", "/about", "/contact", "/faq",
   "/trails", "/trails/alpine-lake", "/login", "/signup",
+  "/trails/cedar-falls/reviews",
 ];
 
 for (const path of pages) {

@@ -6,9 +6,6 @@ const setup = /.*\.setup\.js/;
 const teardown = /.*\.teardown\.js/;
 // Needs the dev server, for instant()
 const devOnly = /loading\.spec\.js/;
-// The baselines are for macOS: not in CI
-const visual = /visual\.spec\.js/;
-const skipInCI = process.env.CI ? [visual] : [];
 
 export default defineConfig({
   testDir: "e2e",
@@ -42,7 +39,7 @@ export default defineConfig({
     {
       name: "chromium",
       use: { ...desktop },
-      testIgnore: [setup, teardown, signedIn, devOnly, ...skipInCI],
+      testIgnore: [setup, teardown, signedIn, devOnly],
       dependencies: ["setup"],
     },
     {

@@ -4,6 +4,7 @@ import TrailThumb from "@/components/TrailThumb";
 import { Badge } from "@/components/ui";
 import FavoriteButton from "@/components/FavoriteButton";
 import { cardShell } from "@/components/card-styles";
+import { estimateMinutes, formatDuration } from "@/lib/hike-time";
 
 // Which badge for which level
 const levelVariant = {
@@ -34,6 +35,9 @@ export default function TrailCard({ trail }) {
           <p className="flex items-center gap-2 text-sm text-muted">
             {`${trail.km} km`}
             <Badge variant={levelVariant[trail.level]}>{trail.level}</Badge>
+          </p>
+          <p className="text-sm text-muted">
+            {`About ${formatDuration(estimateMinutes(trail))}`}
           </p>
         </div>
         <FavoriteButton slug={trail.slug} name={trail.name} />

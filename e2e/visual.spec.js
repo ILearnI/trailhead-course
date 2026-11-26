@@ -18,3 +18,8 @@ test("the trails page looks the same", async ({ page }) => {
     mask: [page.getByText(/Opened at/)],
   });
 });
+
+test("the review form looks the same", async ({ page }) => {
+  await page.goto("/trails/cedar-falls/reviews", { waitUntil: "networkidle" });
+  await expect(page.locator("#review-form")).toHaveScreenshot("review-form.png");
+});

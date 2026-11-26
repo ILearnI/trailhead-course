@@ -25,4 +25,13 @@ describe("TrailCard", () => {
     expect(screen.getByText("Easy")).toBeInTheDocument();
     expect(screen.getByText("4.2 km")).toBeInTheDocument();
   });
+
+  it("shows how long the walk takes", () => {
+    render(
+      <FavoritesProvider>
+        <TrailCard trail={trail} />
+      </FavoritesProvider>,
+    );
+    expect(screen.getByText("About 1 h 5 min")).toBeInTheDocument();
+  });
 });

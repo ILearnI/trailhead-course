@@ -78,3 +78,4 @@ jobs:
           path: |
             playwright-report
             test-results
+            e2e/visual.spec.js-snapshots
