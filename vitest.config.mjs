@@ -32,6 +32,7 @@ export default defineConfig({
         "src/lib/api.js",
         "src/lib/dictionaries.js",
         "src/lib/og-card.js",
+        "src/lib/ai.js",
         // Demos from earlier chapters
         "src/lib/{burn,cms,counts,failing,legacy-stats}.js",
         "src/lib/{personal,profile,request-info,scopes,spots,stats}.js",

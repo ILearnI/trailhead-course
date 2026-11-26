@@ -3,6 +3,7 @@ import { notFound, redirect } from "next/navigation";
 import ReviewCount from "@/components/ReviewCount";
 import RatingSummary from "@/components/RatingSummary";
 import LiveTrailReviews from "@/components/LiveTrailReviews";
+import TrailBlurb from "@/components/TrailBlurb";
 import TrailWeather from "@/components/TrailWeather";
 import RatingStars from "@/components/RatingStars";
 import TrailBadge from "@/components/TrailBadge";
@@ -55,6 +56,7 @@ export default async function TrailPage({ params }) {
       <ReviewCount slug={slug} />
       <RatingSummary reviews={reviews} />
       <LiveTrailReviews slug={slug} />
+      <TrailBlurb slug={slug} />
       <TrailWeather region={trail.region} />
       <TrailBadge name={trail.name} region={trail.region} />
       <Collapsible title="the latest reviews">
