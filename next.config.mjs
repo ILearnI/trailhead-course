@@ -5,6 +5,8 @@ import createMDX from "@next/mdx";
 const nextConfig = {
   // Pages can be .md and .mdx files too
   pageExtensions: ["js", "jsx", "md", "mdx"],
+  // Do not tell which framework this is
+  poweredByHeader: false,
   /* config options here */
   // A small server for containers
   output: "standalone",

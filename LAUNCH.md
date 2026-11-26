@@ -16,6 +16,20 @@ Measured on the production build: `scripts/launch-check.mjs`,
 | JavaScript per page | 535 to 546 KB | 536 to 546 KB |
 | Lighthouse of /trails | 89 | 88 (noise) |
 
+## Launch checklist
+
+Run `node --env-file=.env.local scripts/preflight.mjs`:
+variables, secrets in the bundle, the shell of the pages,
+search engine checks, health, login, errors, headers.
+
+By a person, before the first visitor:
+
+- [ ] The domain points to the server, with a real certificate
+- [ ] The database and uploads are backed up, and restored once
+- [ ] Someone is alerted when /api/health fails
+- [ ] The previous image is kept, and the way back is written
+- [ ] Production secrets are new, and only on the server
+
 ## Left to do
 
 - One share image for the whole site: pages could have their own.

@@ -24,6 +24,23 @@ services:
   app2:
     <<: *app
 
+  # The API of the course, next to each app
+  api1:
+    image: trailhead
+    command: ["node", "mock-api/server.mjs"]
+    network_mode: "service:app1"
+    depends_on:
+      - app1
+    restart: unless-stopped
+
+  api2:
+    image: trailhead
+    command: ["node", "mock-api/server.mjs"]
+    network_mode: "service:app2"
+    depends_on:
+      - app2
+    restart: unless-stopped
+
   redis:
     image: redis:7-alpine
     restart: unless-stopped

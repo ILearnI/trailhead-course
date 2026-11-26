@@ -17,7 +17,7 @@ export default defineConfig({
     // A secret for the tests: never the real one
     env: { SESSION_SECRET: "test-secret-0123456789abcdef0123456789" },
     // Jest has its own files
-    exclude: [...configDefaults.exclude, "**/*.jest.test.js", "e2e/**"],
+    exclude: [...configDefaults.exclude, "**/*.jest.test.js", "e2e/**", ".next/**"],
     // Report the coverage of our own code
     coverage: {
       provider: "v8",

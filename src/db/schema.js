@@ -11,6 +11,7 @@ export const trails = sqliteTable("trails", {
   slug: text("slug").notNull().unique(),
   name: text("name").notNull(),
   description: text("description"),
+  photo: text("photo"),
   region: text("region", { enum: ["alps", "coast", "forest"] }).notNull(),
   level: text("level", { enum: ["Easy", "Moderate", "Hard"] }).notNull(),
   km: real("km").notNull(),

@@ -12,6 +12,12 @@ export function apiError(request, status, code, message) {
   return apiJson(request, { error: { code, message } }, status);
 }
 
+// A trail, as the contract of version one says
+export function publicTrail(trail) {
+  const { id, slug, name, description, region, level, km, createdAt } = trail;
+  return { id, slug, name, description, region, level, km, createdAt };
+}
+
 // The client of the key, or an error to return
 export function requireClient(request) {
   const client = findClient(request);

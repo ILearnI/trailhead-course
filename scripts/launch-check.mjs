@@ -14,7 +14,10 @@ const paths = [
 const sitemap = await (await fetch(`${base}/sitemap.xml`)).text();
 
 const browser = await chromium.launch();
-const page = await browser.newPage();
+// Test certificate: accepted here only
+const local = base.startsWith("https://localhost");
+const context = await browser.newContext({ ignoreHTTPSErrors: local });
+const page = await context.newPage();
 const found = [];
 
 for (const path of paths) {
