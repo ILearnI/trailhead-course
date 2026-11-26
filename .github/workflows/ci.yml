@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  # Only for the tests: not a real secret
+  SESSION_SECRET: ci-only-secret-0123456789abcdef0123456789
+  DATABASE_URL: file:data/trailhead.db
+
+jobs:
+  checks:
+    name: Lint and unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run test:coverage
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage
+
+  e2e:
+    name: End-to-end, shard ${{ matrix.shard }} of 2
+    needs: checks
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run db:migrate && npm run db:seed
+      - name: Start the helper servers
+        run: |
+          python3 -m http.server 4001 --directory public/trails &
+          node mock-api/server.mjs &
+      - uses: actions/cache@v4
+        with:
+          path: .next/cache
+          key: next-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: next-${{ runner.os }}-
+      - run: npm run build
+      - run: npx playwright test --project=chromium --project=signed-in --shard=${{ matrix.shard }}/2
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report-${{ matrix.shard }}
+          path: |
+            playwright-report
+            test-results

@@ -1,0 +1,23 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "trails": "Senderos",
+    "language": "Idioma",
+    "sections": "Secciones"
+  },
+  "levels": { "Easy": "Fácil", "Moderate": "Moderado", "Hard": "Difícil" },
+  "regions": { "alps": "los Alpes", "coast": "la costa", "forest": "el bosque" },
+  "home": {
+    "title": "Bienvenido a Trailhead",
+    "intro": "Una guía de senderos y una comunidad para quienes aman la naturaleza.",
+    "cta": "Ver los senderos",
+    "season": "La temporada abre el {date}.",
+    "regions": "Regiones: {list}."
+  },
+  "trails": {
+    "title": "Todos los senderos",
+    "intro": "Elige un sendero, lee las opiniones, y sal.",
+    "description": "Todos los senderos de Trailhead, con su nivel y su longitud.",
+    "count": { "one": "{count} sendero", "other": "{count} senderos" }
+  }
+}

@@ -1,0 +1,31 @@
+/* These class names belong to this file */
+// A Sass variable
+$brand: #0f766e;
+
+.card {
+  padding: 1rem;
+  text-align: center;
+  border: 1px solid #d4d4d8;
+  border-radius: 0.75rem;
+
+  // Nesting: a rule inside a rule
+  &:hover .value {
+    color: $brand;
+  }
+}
+
+.value {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.label {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+/* Reuse the card rules, and change one */
+.highlight {
+  composes: card;
+  border-color: $brand;
+}

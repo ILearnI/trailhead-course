@@ -1,0 +1,23 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "trails": "Sentiers",
+    "language": "Langue",
+    "sections": "Sections"
+  },
+  "levels": { "Easy": "Facile", "Moderate": "Modéré", "Hard": "Difficile" },
+  "regions": { "alps": "les Alpes", "coast": "la côte", "forest": "la forêt" },
+  "home": {
+    "title": "Bienvenue sur Trailhead",
+    "intro": "Un guide de sentiers et une communauté pour ceux qui aiment la nature.",
+    "cta": "Voir les sentiers",
+    "season": "La saison ouvre le {date}.",
+    "regions": "Régions : {list}."
+  },
+  "trails": {
+    "title": "Tous les sentiers",
+    "intro": "Choisissez un sentier, lisez les avis, et partez.",
+    "description": "Tous les sentiers de Trailhead, avec leur niveau et leur longueur.",
+    "count": { "one": "{count} sentier", "other": "{count} sentiers" }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "nav": {
+    "home": "Home",
+    "trails": "Trails",
+    "language": "Language",
+    "sections": "Sections"
+  },
+  "levels": { "Easy": "Easy", "Moderate": "Moderate", "Hard": "Hard" },
+  "regions": { "alps": "the Alps", "coast": "the coast", "forest": "the forest" },
+  "home": {
+    "title": "Welcome to Trailhead",
+    "intro": "A trail guide and community for people who love the outdoors.",
+    "cta": "See the trails",
+    "season": "The season opens on {date}.",
+    "regions": "Regions: {list}."
+  },
+  "trails": {
+    "title": "All trails",
+    "intro": "Pick a trail, read the reviews, and go.",
+    "description": "Every trail of Trailhead, with its level and its length.",
+    "count": { "one": "{count} trail", "other": "{count} trails" }
+  }
+}
