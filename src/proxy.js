@@ -4,7 +4,7 @@ import { hasLocale, pickLocale } from "@/lib/i18n";
 import { cookieOptions, isOld, readToken, signToken, WEEK } from "@/lib/session-token";
 
 // The pages that need a session
-const PROTECTED = ["/account", "/admin"];
+const PROTECTED = ["/account", "/admin", "/studio"];
 // The pages with a strict policy
 const STRICT = ["/account", "/admin"];
 

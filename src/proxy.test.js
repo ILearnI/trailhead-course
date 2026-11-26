@@ -73,6 +73,11 @@ describe("the session", () => {
     expect(getRedirectUrl(response)).toBe("http://localhost/login?next=%2Faccount");
   });
 
+  it("sends a visitor from the studio to the login", async () => {
+    const response = await proxy(ask("/studio/trails"));
+    expect(getRedirectUrl(response)).toBe("http://localhost/login?next=%2Fstudio%2Ftrails");
+  });
+
   it("lets a signed in person through, with a CSP", async () => {
     const token = await signToken(1);
     const response = await proxy(ask("/account", token));

@@ -7,11 +7,20 @@ const ALL = [
   "review:delete:any",
   "user:read",
   "user:set-role",
+  "studio:view",
+  "trail:write",
 ];
 
 // What each role should be able to do
 const EXPECTED = {
   user: ["review:create", "review:delete:own"],
+  editor: [
+    "review:create",
+    "review:delete:own",
+    "review:delete:any",
+    "studio:view",
+    "trail:write",
+  ],
   admin: ALL,
 };
 
