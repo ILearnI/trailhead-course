@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Link from "next/link";
 import NavLink from "./NavLink";
 import FavoritesCount from "./FavoritesCount";
 import TrailCount from "./TrailCount";
@@ -19,11 +20,20 @@ export default function SiteHeader() {
   return (
     <header className="flex flex-wrap gap-x-4 gap-y-1 sm:gap-x-6 border-b px-4 md:px-8 py-3 font-medium">
       <nav aria-label="Main" className="flex flex-wrap gap-x-4 gap-y-1 sm:gap-x-6">
-      {links.map((link) => (
-        <NavLink key={link.href} href={link.href}>
-          {link.label}
-        </NavLink>
-      ))}
+      {/* The active link needs the path */}
+      <Suspense
+        fallback={links.map((link) => (
+          <Link key={link.href} href={link.href} className="text-zinc-500">
+            {link.label}
+          </Link>
+        ))}
+      >
+        {links.map((link) => (
+          <NavLink key={link.href} href={link.href}>
+            {link.label}
+          </NavLink>
+        ))}
+      </Suspense>
       </nav>
       <TrailCount />
       <ThemeToggle />

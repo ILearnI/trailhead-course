@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono, Lora } from "next/font/google";
 import localFont from "next/font/local";
 import Script from "next/script";
+import { Suspense } from "react";
 import "./globals.css";
 import { siteUrl } from "@/lib/site";
 import Analytics from "@/components/Analytics";
@@ -93,7 +94,9 @@ export default function RootLayout({ children }) {
             {children}
           </div>
           <SiteFooter />
-          <Analytics />
+          <Suspense fallback={null}>
+            <Analytics />
+          </Suspense>
           <WebVitals />
         </FavoritesProvider>
         </ToastProvider>

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import CurrentPath from "./CurrentPath";
 import TimeOnSite from "./TimeOnSite";
@@ -9,7 +10,9 @@ export default function SiteFooter() {
       <Link href="/privacy" prefetch={false}>Privacy</Link>
       <Link href="/terms" prefetch={false}>Terms</Link>
       <TimeOnSite />
-      <CurrentPath />
+      <Suspense fallback={null}>
+        <CurrentPath />
+      </Suspense>
     </footer>
   );
 }
