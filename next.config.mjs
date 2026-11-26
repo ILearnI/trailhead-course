@@ -6,6 +6,8 @@ const nextConfig = {
   // Pages can be .md and .mdx files too
   pageExtensions: ["js", "jsx", "md", "mdx"],
   /* config options here */
+  // A small server for containers
+  output: "standalone",
   cacheComponents: true,
   // Memoize components for us
   reactCompiler: true,

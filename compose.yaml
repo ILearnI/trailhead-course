@@ -1,0 +1,45 @@
+# The whole site: two apps, a shared cache, a front door
+services:
+  app1: &app
+    build: .
+    image: trailhead
+    environment:
+      SESSION_SECRET: ${SESSION_SECRET:?Set SESSION_SECRET}
+      REVALIDATE_SECRET: ${REVALIDATE_SECRET:?Set REVALIDATE_SECRET}
+      WEBHOOK_SECRET: ${WEBHOOK_SECRET:?Set WEBHOOK_SECRET}
+      DRAFT_SECRET: ${DRAFT_SECRET:-}
+      ANALYTICS_SECRET: ${ANALYTICS_SECRET:-}
+      RANGER_TOKEN: ${RANGER_TOKEN:-}
+      API_KEYS: ${API_KEYS:-}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-}
+      WEATHER_API_KEY: ${WEATHER_API_KEY:-}
+      GOOGLE_GENERATIVE_AI_API_KEY: ${GOOGLE_GENERATIVE_AI_API_KEY:-}
+      REDIS_URL: redis://redis:6379
+    volumes:
+      - data:/app/data
+    depends_on:
+      - redis
+    restart: unless-stopped
+
+  app2:
+    <<: *app
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:1.29-alpine
+    ports:
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./certs:/etc/nginx/certs:ro
+    depends_on:
+      - app1
+      - app2
+    restart: unless-stopped
+
+volumes:
+  data:

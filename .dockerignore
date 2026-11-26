@@ -1,0 +1,10 @@
+node_modules
+.next
+.git
+.env*
+data
+coverage
+certs
+test-results
+playwright-report
+e2e
