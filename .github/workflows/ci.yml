@@ -47,8 +47,11 @@ jobs:
       - run: npm run db:migrate && npm run db:seed
       - name: Start the helper servers
         run: |
-          python3 -m http.server 4001 --directory public/trails &
-          node mock-api/server.mjs &
+          nohup python3 -m http.server 4001 --directory public/trails > /dev/null 2>&1 &
+          nohup node mock-api/server.mjs > mock-api.log 2>&1 &
+          sleep 2
+          curl --fail --silent localhost:4002/trails > /dev/null
+          curl --fail --silent --head localhost:4001/alpine-lake.jpg > /dev/null
       - uses: actions/cache@v4
         with:
           path: .next/cache
