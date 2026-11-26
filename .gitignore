@@ -21,6 +21,8 @@
 # next.js
 /.next/
 /out/
+/handbook/out/
+/handbook/.next/
 
 # uploaded files
 /uploads

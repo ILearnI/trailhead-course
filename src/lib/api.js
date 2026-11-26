@@ -1,3 +1,6 @@
+import { log } from "@/lib/logger";
+import { withSpan } from "@/lib/tracing";
+
 // The address of the mock API
 const API = "http://localhost:4002";
 
@@ -21,9 +24,14 @@ export async function fetchCount(key) {
 }
 
 export async function fetchFlaky() {
-  const response = await fetch(`${API}/flaky`);
-  if (!response.ok) throw new Error(`Flaky API: ${response.status}`);
-  return response.json();
+  return withSpan("api.flaky", { path: "/flaky" }, async () => {
+    const response = await fetch(`${API}/flaky`);
+    if (!response.ok) {
+      log.warn("flaky api failed", { status: response.status });
+      throw new Error(`Flaky API: ${response.status}`);
+    }
+    return response.json();
+  });
 }
 
 export async function fetchSuggestion(id) {

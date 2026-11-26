@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { http, HttpResponse } from "msw";
 import { server } from "@/test/server";
-import { fetchReviews, fetchSuggestion } from "./api";
+import { fetchFlaky, fetchReviews, fetchSuggestion } from "./api";
 
 describe("fetchSuggestion", () => {
   it("returns the suggestion that the API found", async () => {
@@ -29,5 +29,16 @@ describe("fetchReviews", () => {
     const reviews = await fetchReviews("alpine-lake");
     expect(reviews).toHaveLength(1);
     expect(reviews[0].trail).toBe("alpine-lake");
+  });
+});
+
+describe("fetchFlaky", () => {
+  it("throws when the service fails", async () => {
+    server.use(
+      http.get("http://localhost:4002/flaky", () =>
+        HttpResponse.json({ error: "Flaky service" }, { status: 500 }),
+      ),
+    );
+    await expect(fetchFlaky()).rejects.toThrow("Flaky API: 500");
   });
 });

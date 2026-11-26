@@ -4,6 +4,7 @@ import { createReview, listReviews } from "@/dal/reviews";
 import { getTrail } from "@/dal/trails";
 import { getSession } from "@/lib/session";
 import { tags } from "@/lib/tags";
+import { withSpan } from "@/lib/tracing";
 
 const reviewSchema = z.object({
   rating: z.number().int().min(1).max(5),
@@ -15,7 +16,7 @@ export async function GET(request, { params }) {
   if (!(await getTrail(slug))) {
     return Response.json({ error: "No such trail" }, { status: 404 });
   }
-  const items = await listReviews(slug);
+  const items = await withSpan("reviews.list", { slug }, () => listReviews(slug));
   return Response.json({ count: items.length, items });
 }
 
